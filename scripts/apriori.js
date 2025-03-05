@@ -9,8 +9,8 @@ const EXPLORER_URL = "https://testnet.monadexplorer.com/tx/";
 const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
 const contractAddress = "0xb2f82D0f38dc453D596Ad40A37799446Cc89274A";
 const gasLimitStake = 500000;
-const gasLimitUnstake = 800000;
-const gasLimitClaim = 800000;
+const gasLimitUnstake = Math.floor(Math.random() * (200000 - 180000 + 1)) + 180000;
+const gasLimitClaim = Math.floor(Math.random() * (150000 - 100000 + 1)) + 100000;;
 
 const minimalABI = [
   "function getPendingUnstakeRequests(address) view returns (uint256[] memory)",
@@ -85,9 +85,15 @@ async function stakeMON(wallet, cycleNumber) {
     const tx = {
       to: contractAddress,
       data: data,
-      gasLimit: ethers.utils.hexlify(gasLimitStake),
+      // gasLimit: ethers.utils.hexlify(gasLimitStake),
       value: stakeAmount,
     };
+
+    // 🛠 Lấy gas estimate cho giao dịch stake
+    const gasEstimate = await wallet.provider.estimateGas(tx);
+
+    // Cập nhật gasLimit trong tx
+    tx.gasLimit = gasEstimate;
 
     console.log("🔄 Gửi yêu cầu stake...");
     const txResponse = await wallet.sendTransaction(tx);
