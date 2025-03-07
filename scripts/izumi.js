@@ -83,8 +83,8 @@ async function wrapMON(wallet, amount, cycleNumber) {
       ],
       wallet
     );
-    
-    const tx = await contract.deposit({ value: amount, gasLimit: 500000 });
+    const gasLimit = (await contract.estimateGas.deposit()).mul(2);
+    const tx = await contract.deposit({ value: amount, gasLimit: gasLimit });
     console.log(`✔️  Wrap MON → WMON thành công`.green.underline);
     console.log(`➡️  Transaction sent: ${EXPLORER_URL}${tx.hash}`.yellow);
     await tx.wait();
@@ -112,8 +112,8 @@ async function unwrapMON(wallet, amount, cycleNumber) {
       ],
       wallet
     );
-    
-    const tx = await contract.withdraw(amount, { gasLimit: 500000 });
+    const gasLimit = (await contract.estimateGas.withdraw(amount)).mul(2);
+    const tx = await contract.withdraw(amount, { gasLimit: gasLimit });
     console.log(`✔️  Unwrap WMON → MON thành công`.green.underline);
     console.log(`➡️  Transaction sent: ${EXPLORER_URL}${tx.hash}`.yellow);
     await tx.wait();
