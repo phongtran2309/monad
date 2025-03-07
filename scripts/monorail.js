@@ -195,7 +195,8 @@ async function wrapMON(amount, wallet) {
   return await withRetry(async () => {
     console.log(`🔄 Wrap ${ethers.utils.formatEther(amount)} MON → WMON...`.magenta);
     const wmonContract = new ethers.Contract(WMON_CONTRACT, WMON_ABI, wallet);
-    const tx = await wmonContract.deposit({ value: amount, gasLimit: 500000 });
+    const gasLimit = (await wmonContract.estimateGas.deposit()).mul(2);
+    const tx = await wmonContract.deposit({ value: amount, gasLimit: gasLimit });
     console.log(`✔️ Wrap MON → WMON thành công`.green.underline);
     console.log(`➡️ Transaction sent: ${EXPLORER_URL}${tx.hash}`.yellow);
     await tx.wait();
@@ -207,7 +208,8 @@ async function unwrapMON(amount, wallet) {
   return await withRetry(async () => {
     console.log(`🔄 Unwrap ${ethers.utils.formatEther(amount)} WMON → MON...`.magenta);
     const wmonContract = new ethers.Contract(WMON_CONTRACT, WMON_ABI, wallet);
-    const tx = await wmonContract.withdraw(amount, { gasLimit: 500000 });
+    const gasLimit = (await wmonContract.estimateGas.withdraw(amount)).mul(2);
+    const tx = await wmonContract.withdraw(amount, { gasLimit: gasLimit });
     console.log(`✔️ Unwrap WMON → MON thành công`.green.underline);
     console.log(`➡️ Transaction sent: ${EXPLORER_URL}${tx.hash}`.yellow);
     await tx.wait();
@@ -264,8 +266,9 @@ async function swapTokens(wallet, tokenA, tokenB, amountIn, isToMON = false) {
     
     return await withRetry(async () => {
       const feeData = await wallet.provider.getFeeData();
+      const randomGasLimit = Math.floor(Math.random() * (200000 - 150000 + 1)) + 150000;
       const txOverrides = {
-        gasLimit: 500000,
+        gasLimit: randomGasLimit,
         maxFeePerGas: feeData.maxFeePerGas || feeData.gasPrice,
         maxPriorityFeePerGas: feeData.maxPriorityFeePerGas || feeData.gasPrice
       };
