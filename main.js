@@ -2,18 +2,18 @@ const ethers = require("ethers");
 const prompts = require("prompts");
 
 const availableScripts = [
-  { title: "1. Rubics (Swap)", value: "rubic" },
-  { title: "2. Izumi (Swap)", value: "izumi" },
+  // { title: "1. Rubics (Swap)", value: "rubic" },
+  // { title: "2. Izumi (Swap)", value: "izumi" },
   { title: "3. Beanswap (Swap)", value: "beanswap" },
-  { title: "4. Magma (Stake)", value: "magma" },
-  { title: "5. Apriori (Stake)", value: "apriori" },
+  // { title: "4. Magma (Stake)", value: "magma" },
+  // { title: "5. Apriori (Stake)", value: "apriori" },
   { title: "6. Monorail (Swap)", value: "monorail" },
   { title: "7. Ambient (Swap) (noauto)", value: "ambient" },
   { title: "8. Deploy Contract (noauto)", value: "deployct" },
-  { title: "9. Kintsu (Stake)", value: "kintsu" },
-  { title: "10. Shmonad (Stake)", value: "shmonad" },
-  { title: "Chạy auto lần lượt 1-6", value: "all" },
-  { title: "Chạy auto lần lượt 1-6, 9 và 10", value: "all-with-kintsu-shmonad" },
+  // { title: "9. Kintsu (Stake)", value: "kintsu" },
+  // { title: "10. Shmonad (Stake)", value: "shmonad" },
+  // { title: "Chạy auto lần lượt 1-6", value: "all" },
+  // { title: "Chạy auto lần lượt 1-6, 9 và 10", value: "all-with-kintsu-shmonad" },
   { title: "Exit", value: "exit" },
 ];
 
