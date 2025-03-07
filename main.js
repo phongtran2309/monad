@@ -8,7 +8,7 @@ const availableScripts = [
   // { title: "4. Magma (Stake)", value: "magma" },
   // { title: "5. Apriori (Stake)", value: "apriori" },
   { title: "6. Monorail (Swap)", value: "monorail" },
-  { title: "7. Ambient (Swap) (noauto) đang lỗi", value: "ambient" },
+  // { title: "7. Ambient (Swap) (noauto) đang lỗi", value: "ambient" },
   { title: "8. Deploy Contract (noauto)", value: "deployct" },
   // { title: "9. Kintsu (Stake)", value: "kintsu" },
   // { title: "10. Shmonad (Stake)", value: "shmonad" },

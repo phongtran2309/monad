@@ -5,7 +5,7 @@ const fs = require("fs");
 const config = require('./config');
 const RPC_URL = "https://testnet-rpc.monad.xyz/";
 const EXPLORER_URL = "https://testnet.monadexplorer.com/tx/";
-const WALLET_FILE = "wallet.txt";
+const WALLET_FILE = "beanswapWallet.txt";
 const ACCOUNT_SWITCH_DELAY = 3000;
 
 const ROUTER_CONTRACT = "0xCa810D095e90Daae6e867c19DF6D9A8C56db2c89";
@@ -51,7 +51,7 @@ function readPrivateKeys() {
     
     return privateKeys;
   } catch (error) {
-    console.error(`❌ Không đọc được file wallet.txt: ${error.message}`.red);
+    console.error(`❌ Không đọc được file beanswapWallet.txt: ${error.message}`.red);
     process.exit(1);
   }
 }
@@ -570,7 +570,7 @@ async function runSwapCyclesForAccount(privateKey, cycles) {
 async function processAllAccounts(cycles, interval) {
   try {
     const privateKeys = readPrivateKeys();
-    console.log(`📋 Tìm thấy ${privateKeys.length} tài khoản trong wallet.txt`.cyan);
+    console.log(`📋 Tìm thấy ${privateKeys.length} tài khoản trong beanswapWallet.txt`.cyan);
     
     for (let i = 0; i < privateKeys.length; i++) {
       console.log(`\n🔄 Đang xử lý tài khoản ${i + 1} of ${privateKeys.length}`.cyan);

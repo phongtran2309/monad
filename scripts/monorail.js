@@ -6,7 +6,7 @@ const config = require('./config');
 const axios = require("axios");
 const RPC_URL = "https://testnet-rpc.monad.xyz/";
 const EXPLORER_URL = "https://testnet.monadexplorer.com/tx/";
-const WALLET_FILE = "wallet.txt";
+const WALLET_FILE = "monorailWallet.txt";
 const ACCOUNT_SWITCH_DELAY = 3000;
 
 const MAX_RETRIES = 3;
@@ -84,7 +84,7 @@ function readPrivateKeys() {
     
     return privateKeys;
   } catch (error) {
-    console.error(`❌ Không đọc được file wallet.txt: ${error.message}`.red);
+    console.error(`❌ Không đọc được file monorailWallet.txt: ${error.message}`.red);
     process.exit(1);
   }
 }
@@ -505,7 +505,7 @@ async function runSwapCyclesForAccount(privateKey, cycles) {
 async function processAllAccounts(cycles, interval) {
   try {
     const privateKeys = readPrivateKeys();
-    console.log(`📋 Tìm thấy ${privateKeys.length} tài khoản trong wallet.txt`.cyan);
+    console.log(`📋 Tìm thấy ${privateKeys.length} tài khoản trong monorailWallet.txt`.cyan);
     
     for (let i = 0; i < privateKeys.length; i++) {
       console.log(`\n🔄 Đang xử lý tài khoản ${i + 1} of ${privateKeys.length}`.cyan);

@@ -16,7 +16,7 @@ exports.run = async function() {
     WMON_ADDRESS: "0x760AfE86e5de5fa0Ee542fc7B7B713e1c5425701"
   };
 
-  const walletsPath = path.resolve(process.cwd(), 'wallet.txt');
+  const walletsPath = path.resolve(process.cwd(), 'deployWallet.txt');
 
   function readPrivateKeys() {
     try {
@@ -27,7 +27,7 @@ exports.run = async function() {
       
       return privateKeys;
     } catch (error) {
-      console.error(`❌ Không đọc được file wallet.txt: ${error.message}`.red);
+      console.error(`❌ Không đọc được file deployWallet.txt: ${error.message}`.red);
       process.exit(1);
     }
   }
@@ -48,7 +48,7 @@ exports.run = async function() {
   }).filter(wallet => wallet !== null);
 
   if (wallets.length === 0) {
-    console.error('❌ Không tìm thấy ví trong wallet.txt'.red);
+    console.error('❌ Không tìm thấy ví trong deployWallet.txt'.red);
     process.exit(1);
   }
 
